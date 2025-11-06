@@ -1,0 +1,7 @@
+{
+  "name": "Aura Voice Chat",
+  "description": "A social voice chat application with live rooms, a coin and diamond economy, EXP levels, a rocket system for rooms, virtual gifts, user missions, daily rewards, and user wallets.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

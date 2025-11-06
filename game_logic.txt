@@ -1,0 +1,91 @@
+This document outlines the basic physics and probabilities for the games in the Aura app.
+
+---
+## Greedy Game (Treasure Chest)
+---
+
+The Greedy game involves picking one of five treasure chests. The payout is determined by a multiplier applied to the player's bet.
+
+**Chest Multipliers:**
+The five chests contain a predefined set of multipliers which are shuffled randomly for each round.
+- Multiplier Set: `['jackpot', 0, 0.5, 2, 5]`
+
+**Jackpot Mechanic:**
+- If the player selects the 'jackpot' chest, a spinning wheel appears with high-value multipliers: `[10, 50, 20]`.
+- The player is awarded a win based on where the wheel lands.
+
+**Probabilities (Initial Chest Pick):**
+- **Win 0x bet (Lose):** 1 out of 5 chests = 20% chance
+- **Win 0.5x bet (Half back):** 1 out of 5 chests = 20% chance
+- **Win 2x bet:** 1 out of 5 chests = 20% chance
+- **Win 5x bet:** 1 out of 5 chests = 20% chance
+- **Trigger Jackpot:** 1 out of 5 chests = 20% chance
+
+---
+## Lucky 7z Game (Slots)
+---
+
+The Lucky 7z game is a 3-reel slot machine. The outcome is determined by the symbols that land on the center line.
+
+**Reel Composition:**
+Each of the three reels is constructed from a "reel strip" that defines the frequency of each symbol. This determines the probability of landing on a specific symbol.
+- Reel Strip: `['grape', 'bell', 'cherry', 'grape', 'seven', 'bar', 'grape', 'bell', 'grape', 'wild', 'cherry', 'bell', 'grape', 'seven', 'bar']`
+- Total items on strip: 15
+
+**Probabilities per Reel:**
+- **Grape:** 5 out of 15 = ~33.3%
+- **Bell:** 3 out of 15 = 20%
+- **Cherry:** 2 out of 15 = ~13.3%
+- **Seven:** 2 out of 15 = ~13.3%
+- **Bar:** 2 out of 15 = ~13.3%
+- **Wild (Diamond):** 1 out of 15 = ~6.7%
+
+**Payout Table (Multiplier on Bet):**
+- **3 Grapes:** 5x
+- **3 Cherries:** 10x
+- **3 Bells:** 15x
+- **3 Bars:** 20x
+- **3 Sevens:** 50x
+- **3 Wilds (Jackpot):** 100x
+
+**Note on Winnings Calculation:**
+- The game pays out for a 3-of-a-kind match on the center line.
+- **Wilds:** A 'Wild' symbol can substitute for any other symbol to form a winning line.
+  - 1 Wild + 2 matching symbols: Pays as 3 matching symbols.
+  - 2 Wilds + any other symbol: Pays 20x the bet.
+  - 1 Wild + 2 different symbols: Pays 2x the bet as a consolation prize.
+
+---
+## Greedy Baby Game (Roulette)
+---
+
+The Greedy Baby game is a roulette-style wheel game with 8 items. Players can bet on individual items or on one of two categories.
+
+**Game Items & Payouts:**
+The wheel has 8 distinct items. Each item has an equal probability of being selected (1 in 8, or 12.5%). The payout is a multiplier on the bet placed on the winning item or category.
+
+| Item        | Category | Payout Multiplier |
+|-------------|----------|-------------------|
+| Chicken     | fastfood | 45x               |
+| Apple       | fruits   | 5x                |
+| Lemon       | fruits   | 5x                |
+| Strawberry  | fruits   | 5x                |
+| Mango       | fruits   | 5x                |
+| Fish        | fastfood | 10x               |
+| Burger      | fastfood | 15x               |
+| Pizza       | fastfood | 25x               |
+
+**Category Bets & Payouts:**
+Players can also bet on broader categories.
+- **Fruits:** Contains Apple, Lemon, Strawberry, Mango. Payout is 2x.
+- **Fastfood:** Contains Chicken, Fish, Burger, Pizza. Payout is 2x.
+
+**Winning Calculation:**
+A player's total win for a round is the sum of their winning bets:
+- `(Bet on winning item) * (Item's multiplier)`
+- `+ (Bet on winning category) * (Category's multiplier)`
+
+For example, if a player bets 100 on "Apple" and 500 on "Fruits", and the wheel lands on "Apple":
+- Win from item bet: 100 * 5 = 500
+- Win from category bet: 500 * 2 = 1000
+- Total win: 1500
